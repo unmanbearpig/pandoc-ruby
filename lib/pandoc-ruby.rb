@@ -112,6 +112,15 @@ class PandocRuby
     self.options = args
   end
 
+  def env
+    @env ||= {}
+  end
+
+  def with_env(env)
+    @env = env
+    self
+  end
+
   # Run the conversion. The convert method can take any number of arguments,
   # which will be converted to pandoc options. If options were already
   # specified in an initializer or reader method, they will be combined with
@@ -203,7 +212,7 @@ class PandocRuby
     def execute(command)
       output = error = exit_status = nil
       @timeout ||= 31_557_600 # A year should be enough?
-      Open3.popen3(command) do |stdin, stdout, stderr, wait_thr|
+      Open3.popen3(env, command) do |stdin, stdout, stderr, wait_thr|
         begin
           Timeout.timeout(@timeout) do
             unless self.input_string.nil?
