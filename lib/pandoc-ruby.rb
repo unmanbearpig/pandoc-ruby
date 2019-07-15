@@ -91,24 +91,22 @@ class PandocRuby
     @writer ||= 'html'
   end
 
-  attr_accessor :input_files
   attr_accessor :input_string
 
   # Create a new PandocRuby converter object. The first argument contains the
-  # input either as string or as an array of filenames.
+  # input string
   #
   # Any other arguments will be converted to pandoc options.
   #
   # Usage:
   #   new("# A String", :option1 => :value, :option2)
-  #   new(["/path/to/file.md"], :option1 => :value, :option2)
-  #   new(["/to/file1.html", "/to/file2.html"], :option1 => :value)
   def initialize(*args)
     if args[0].is_a?(String)
       self.input_string = args.shift
-    elsif args[0].is_a?(Array)
-      self.input_files = args.shift.join(' ')
+    else
+      raise ArgumentError.new("Expected a string, got \"#{args[0]}\"")
     end
+
     self.options = args
   end
 

@@ -83,17 +83,6 @@ PandocRuby assumes the `pandoc` executable is via your environment's `$PATH`
 variable.  If you'd like to set an explicit path to the `pandoc` executable,
 you can do so with  `PandocRuby.pandoc_path = '/path/to/pandoc'`
 
-PandocRuby can also take an array of one or more file paths as the first
-argument. The files will be concatenated together with a blank line between
-each and used as input.
-
-```ruby
-# One file path as a single-element array.
-PandocRuby.html(['/path/to/file1.html']).to_markdown
-# Multiple file paths as an array.
-PandocRuby.html(['/path/to/file1.html', '/path/to/file2.html']).to_markdown
-```
-
 Available format readers and writers are available in the `PandocRuby::READERS`
 and `PandocRuby::WRITERS` constants.
 
