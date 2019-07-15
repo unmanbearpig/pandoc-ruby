@@ -199,11 +199,7 @@ class PandocRuby
 
     # Wrapper to run pandoc in a consistent, DRY way
     def execute_pandoc
-      if !self.input_files.nil?
-        execute("#{@@pandoc_path} #{self.input_files}#{self.option_string}")
-      else
-        execute("#{@@pandoc_path}#{self.option_string}")
-      end
+      execute("#{@@pandoc_path}#{self.option_string}")
     end
 
     # Run the command and returns the output.
